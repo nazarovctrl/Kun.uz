@@ -1,0 +1,42 @@
+### create region
+POST localhost:8080/region
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4MzUxNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzA5MjE1NTcsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.B54z6VKL-BoesLsDScPsR5KgVbV6XbqHniQFp-Gvh_5ydi7A7F678rph-BDzs8Wli7ahvs6Gpo0vHipnSjPpDQ
+
+{
+  "key": "Tosh",
+  "name_uz": "Toshkent",
+  "name_ru": "Tashkent",
+  "name_en": "Tashkent"
+}
+
+
+### get list
+GET  localhost:8080/region/list?page=0&size=20
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+
+### get by lang
+GET  localhost:8080/region/byLang/uz
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+
+
+### update article type
+PUT localhost:8080/region/1
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+{
+  "key": "Tosh",
+  "name_uz": "Toshqand",
+  "name_ru": "Tashkent",
+  "name_en": "Tashkent"
+}
+
+### delete by id
+DELETE localhost:8080/region/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+
+

@@ -1,0 +1,33 @@
+### create
+POST localhost:8080/profile/admin/create
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4MzQ4NDIsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzA5MjEyNDIsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.RzjsDsbF4Zw2PaqKI_520vbbbOFMnoSwcm52nmfQqLf5qmaFNBmU3Xa_GQUfATPHztw-EfSggyZ4StGqb4TCVA
+
+{
+  "name": "m",
+  "surname": "mod",
+  "email": "moderator@gmail.com",
+  "password": "200622az",
+  "role": "MODERATOR"
+}
+
+### update admin
+PUT localhost:8080/profile/user
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA0MDgzMTksImlkIjozLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzA0OTQ3MTksImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.Jl27mscN6Fz0GJXul6QihKgvaSJO7I3ZSpw9qwym88lhWvcbMKKpvYFYNn4HnfKR4HLll6J3ETUT-Bv9ODL6Rg
+
+{
+   "id": 1,
+  "name": "Admin",
+  "surname": "Adminjon",
+  "password": "200622az"
+}
+
+
+### get list
+GET localhost:8080/profile/admin/list?page=0&size=20
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA2Nzc4NTQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzA3NjQyNTQsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.1EOwrQ4FRmChaPixScF6U1y_MGdYAqj8x9AWi_kv6R0OGeeSahXdHDdVkQsPk3eNbcH6d61dyq91WiRscwWR7Q
+
+### delete by id
+DELETE localhost:8080/profile/delete/1
+Authorization: Bearer

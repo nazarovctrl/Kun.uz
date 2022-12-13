@@ -1,0 +1,27 @@
+2022-12-13T20:30:21.738+05:00  INFO 3216 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-13T20:30:21.757+05:00  INFO 3216 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-13T20:30:21.758+05:00  INFO 3216 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.1]
+2022-12-13T20:30:21.910+05:00  INFO 3216 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-13T20:30:21.911+05:00  INFO 3216 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3147 ms
+2022-12-13T20:30:22.027+05:00 DEBUG 3216 --- [main] com.example.kunuz.config.TokenFilter     : Filter 'tokenFilter' configured for use
+2022-12-13T20:30:22.180+05:00  INFO 3216 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-13T20:30:22.265+05:00  INFO 3216 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.5.Final
+2022-12-13T20:30:22.488+05:00  WARN 3216 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2022-12-13T20:30:22.645+05:00  INFO 3216 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-13T20:30:23.172+05:00  INFO 3216 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@ba4f370
+2022-12-13T20:30:23.174+05:00  INFO 3216 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-13T20:30:23.346+05:00  INFO 3216 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-12-13T20:30:25.143+05:00  INFO 3216 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-13T20:30:25.154+05:00  INFO 3216 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-13T20:30:26.154+05:00  WARN 3216 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-13T20:30:27.723+05:00  INFO 3216 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-13T20:30:27.736+05:00  INFO 3216 --- [main] com.example.kunuz.KunUzApplication       : Started KunUzApplication in 10.025 seconds (process running for 11.336)
+2022-12-13T20:30:43.814+05:00  INFO 3216 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-13T20:30:43.815+05:00  INFO 3216 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-13T20:30:43.817+05:00  INFO 3216 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-13T20:30:44.428+05:00  WARN 3216 --- [http-nio-8080-exec-8] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.RegionController
+2022-12-13T20:30:44.620+05:00  WARN 3216 --- [http-nio-8080-exec-8] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ProfileController
+2022-12-13T20:30:44.653+05:00  WARN 3216 --- [http-nio-8080-exec-8] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ArticleTypeController
+2022-12-13T20:30:44.673+05:00  WARN 3216 --- [http-nio-8080-exec-8] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ArticleController
+2022-12-13T20:30:44.688+05:00  WARN 3216 --- [http-nio-8080-exec-8] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.SavedArticleController
+2022-12-13T20:30:44.717+05:00  WARN 3216 --- [http-nio-8080-exec-8] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.AuthController

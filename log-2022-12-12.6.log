@@ -1,0 +1,43 @@
+2022-12-12T21:40:48.570+05:00  INFO 5792 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T21:40:49.398+05:00  WARN 5792 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-12T21:40:50.488+05:00  INFO 5792 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-12T21:40:50.495+05:00  INFO 5792 --- [main] com.example.kunuz.KunUzApplication       : Started KunUzApplication in 9.504 seconds (process running for 10.751)
+2022-12-12T21:41:03.481+05:00  INFO 5792 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-12T21:41:03.481+05:00  INFO 5792 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-12T21:41:03.483+05:00  INFO 5792 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-12-12T21:41:21.916+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.RegionController
+2022-12-12T21:41:22.152+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ProfileController
+2022-12-12T21:41:22.171+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ArticleTypeController
+2022-12-12T21:41:22.183+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ArticleController
+2022-12-12T21:41:22.193+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.SavedArticleController
+2022-12-12T21:41:22.214+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.AuthController
+2022-12-12T21:41:22.228+05:00  WARN 5792 --- [http-nio-8080-exec-4] o.springdoc.core.models.ParameterInfo    : Using the following default value : ru, without spring conversionService
+2022-12-12T21:41:22.232+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.AttachController
+2022-12-12T21:41:22.244+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.ArticleLikeController
+2022-12-12T21:41:22.275+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.InitController
+2022-12-12T21:41:22.278+05:00  WARN 5792 --- [http-nio-8080-exec-4] ocalVariableTableParameterNameDiscoverer : Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.kunuz.controller.EmailHistoryController
+2022-12-12T21:41:22.342+05:00  INFO 5792 --- [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 608 ms
+2022-12-12T21:47:48.016+05:00  INFO 5792 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T21:47:48.019+05:00  INFO 5792 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-12T21:47:48.022+05:00  INFO 5792 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-12T21:47:54.001+05:00  INFO 13044 --- [main] com.example.kunuz.KunUzApplication       : Starting KunUzApplication using Java 17.0.2 with PID 13044 (E:\Java\6-modul\KunUz\target\classes started by User in E:\Java\6-modul\KunUz)
+2022-12-12T21:47:54.015+05:00 DEBUG 13044 --- [main] com.example.kunuz.KunUzApplication       : Running with Spring Boot v3.0.0, Spring v6.0.2
+2022-12-12T21:47:54.017+05:00  INFO 13044 --- [main] com.example.kunuz.KunUzApplication       : No active profile set, falling back to 1 default profile: "default"
+2022-12-12T21:47:54.728+05:00  INFO 13044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-12T21:47:54.828+05:00  INFO 13044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 8 JPA repository interfaces.
+2022-12-12T21:47:55.258+05:00  INFO 13044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-12T21:47:55.267+05:00  INFO 13044 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-12T21:47:55.267+05:00  INFO 13044 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.1]
+2022-12-12T21:47:55.351+05:00  INFO 13044 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-12T21:47:55.352+05:00  INFO 13044 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1274 ms
+2022-12-12T21:47:55.390+05:00 DEBUG 13044 --- [main] com.example.kunuz.config.TokenFilter     : Filter 'tokenFilter' configured for use
+2022-12-12T21:47:55.477+05:00  INFO 13044 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-12T21:47:55.531+05:00  INFO 13044 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.5.Final
+2022-12-12T21:47:55.728+05:00  WARN 13044 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2022-12-12T21:47:55.871+05:00  INFO 13044 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-12T21:47:56.124+05:00  INFO 13044 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@23b71d24
+2022-12-12T21:47:56.128+05:00  INFO 13044 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-12T21:47:56.175+05:00  INFO 13044 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-12-12T21:47:57.416+05:00  INFO 13044 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-12T21:47:57.425+05:00  INFO 13044 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T21:47:58.193+05:00  WARN 13044 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning

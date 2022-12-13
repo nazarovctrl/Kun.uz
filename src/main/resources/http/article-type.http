@@ -1,0 +1,42 @@
+### create article type
+POST localhost:8080/article_type
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4MzUxNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzA5MjE1NTcsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.B54z6VKL-BoesLsDScPsR5KgVbV6XbqHniQFp-Gvh_5ydi7A7F678rph-BDzs8Wli7ahvs6Gpo0vHipnSjPpDQ
+
+{
+  "key": "key",
+  "name_uz": "yangi",
+  "name_ru": "noviy",
+  "name_en": "new"
+}
+
+
+### get list
+GET  localhost:8080/article_type/list?page=0&size=20
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+
+### get list
+GET  localhost:8080/article_type/byLang/uz
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+
+
+### update article type
+PUT localhost:8080/article_type/1
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+{
+  "key": "key2",
+  "name_uz": "eski",
+  "name_ru": "stariy",
+  "name_en": "old"
+}
+
+### delete by id
+DELETE localhost:8080/article_type/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzAwODQ4NjgsImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzAxNzEyNjgsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.X4jC6z1mJgIhl3RXBYM55fFz-kvJJj6hzh85vhMctFT9YJA1EdQn98d5yYsOqJLY5xpbcasY9aFbiOZn8C6Oxg
+
+
+

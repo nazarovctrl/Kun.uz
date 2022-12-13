@@ -1,0 +1,12 @@
+### create
+POST localhost:8080/saved_article/create/3a0b2c3a-6d42-4ed8-b051-e70b55f3e488
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4NDMwNjgsImlkIjo0LCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3MDkyOTQ2OCwiaXNzIjoia3VudXogdGVzdCBwb3J0YWxpIn0.g2W-Smf64vx6LR_w6s58NSQEzOYJuRSB1yhulmH2Dt7U8OcrC3UuVT-T34--6xmp4eXUc2gjYZ_jB-mWYy-edg
+
+### delete
+DELETE localhost:8080/saved_article/delete/3a0b2c3a-6d42-4ed8-b051-e70b55f3e488
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4NDMwNjgsImlkIjo0LCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3MDkyOTQ2OCwiaXNzIjoia3VudXogdGVzdCBwb3J0YWxpIn0.g2W-Smf64vx6LR_w6s58NSQEzOYJuRSB1yhulmH2Dt7U8OcrC3UuVT-T34--6xmp4eXUc2gjYZ_jB-mWYy-edg
+
+
+### get list
+GET  localhost:8080/saved_article/get_list
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4NDMwNjgsImlkIjo0LCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3MDkyOTQ2OCwiaXNzIjoia3VudXogdGVzdCBwb3J0YWxpIn0.g2W-Smf64vx6LR_w6s58NSQEzOYJuRSB1yhulmH2Dt7U8OcrC3UuVT-T34--6xmp4eXUc2gjYZ_jB-mWYy-edg

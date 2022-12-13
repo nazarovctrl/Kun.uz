@@ -1,0 +1,59 @@
+### create article
+POST localhost:8080/article/admin/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4MzU4MTMsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjcwOTIyMjEzLCJpc3MiOiJrdW51eiB0ZXN0IHBvcnRhbGkifQ.RVj6a6_MtnaaD_Y1rq2wdCAhOEfdJFGaRW3oyx6e2KH3wZYxdyx2aDG3KL0U5iPybBKoQKRUcycuvG_ikQ2Q9Q
+Content-Type: application/json
+
+{
+  "title": "Qochqoraka ogilli boldi",
+  "description": "Ha azizlar bu haqiqat",
+  "regionId": 1,
+  "articleTypeId": 1,
+  "content": "Bu shu kuni roy berdi ha azizlar",
+  "imageId": "904f9e4c-3de6-4059-9033-7ecd5d0a7fda"
+}
+
+### delete
+DELETE localhost:8080/article/admin/delete/f47af801-9be1-48ab-96b2-0274f3c944f4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA2ODMyMTksImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjcwNzY5NjE5LCJpc3MiOiJrdW51eiB0ZXN0IHBvcnRhbGkifQ.VlFzFCAIgew0_283kl3iqUBL7UKgKVYlXqDVwI5xifwVfQ23ntZOIi5pn3Iu66h50LBVzY9EtD24W-wlLmAg0w
+
+### update
+PUT localhost:8080/article/admin/update/b21d3b3d-4472-4aec-afee-8fcba7d78310
+
+### change status
+PUT localhost:8080/article/admin/change/3a0b2c3a-6d42-4ed8-b051-e70b55f3e488
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzA4MzU4NzYsImlkIjoyLCJyb2xlIjoiUFVCTElTSEVSIiwiZXhwIjoxNjcwOTIyMjc2LCJpc3MiOiJrdW51eiB0ZXN0IHBvcnRhbGkifQ.Kz0LgvYtYF1qmm46Fk8sTeLRr1BReK6BrSM0rFFdV_kRypga6IPrI5Y0gtICsB33x2qcP3JlDc_Mc_T97GVV4Q
+
+### get last 3 user
+GET localhost:8080/article/user/get_last3/1
+
+### get last 5
+GET localhost:8080/article/user/get_last5/1
+
+
+### get last 8
+GET localhost:8080/article/user/get_last8
+Content-Type: application/json
+
+{
+  "list": ["1","2"]
+}
+
+### get by id
+GET localhost:8080/article/user/get_by_id/e07715d4-b9d3-4c75-b1f7-43d5c69c30f1
+
+### get last 4 by typeiId and witouht one article
+GET localhost:8080/article/user/get_last4_by_type1/1?id=1432w4rwaa
+
+### get top 4
+GET localhost:8080/article/user/gettop4
+
+
+### get last 4 by type 2
+GET localhost:8080/article/user/get_last4_by_type2/1
+
+### get by type and region
+GET localhost:8080/article/user/get_last5_by_type_and_region?type_id=1&region=Tosh
+
+### get with paginatin
+GET localhost:8080/article/user/get_list_by_type/Tosh?page=0&size=10
+

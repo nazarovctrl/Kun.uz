@@ -1,0 +1,40 @@
+2022-12-12T20:52:33.404+05:00  WARN 2836 --- [http-nio-8080-exec-7] c.e.kunuz.controller.AuthController      : Log warn : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:52:33.406+05:00 ERROR 2836 --- [http-nio-8080-exec-7] c.e.kunuz.controller.AuthController      : Log error : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:52:33.406+05:00  INFO 2836 --- [http-nio-8080-exec-7] c.e.kunuz.controller.AuthController      : Authorization : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:52:33.625+05:00 DEBUG 2836 --- [http-nio-8080-exec-9] c.e.kunuz.controller.AuthController      : Lod debug : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:52:33.625+05:00  WARN 2836 --- [http-nio-8080-exec-9] c.e.kunuz.controller.AuthController      : Log warn : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:52:33.626+05:00 ERROR 2836 --- [http-nio-8080-exec-9] c.e.kunuz.controller.AuthController      : Log error : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:52:33.626+05:00  INFO 2836 --- [http-nio-8080-exec-9] c.e.kunuz.controller.AuthController      : Authorization : LoginDTO{email='nazarovazimjon888@gmail.com'}
+2022-12-12T20:53:50.656+05:00  INFO 2836 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T20:53:50.658+05:00  INFO 2836 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-12T20:53:50.661+05:00  INFO 2836 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-12T21:22:53.037+05:00  INFO 17344 --- [main] com.example.kunuz.KunUzApplication       : Starting KunUzApplication using Java 17.0.2 with PID 17344 (E:\Java\6-modul\KunUz\target\classes started by User in E:\Java\6-modul\KunUz)
+2022-12-12T21:22:53.080+05:00 DEBUG 17344 --- [main] com.example.kunuz.KunUzApplication       : Running with Spring Boot v3.0.0, Spring v6.0.2
+2022-12-12T21:22:53.081+05:00  INFO 17344 --- [main] com.example.kunuz.KunUzApplication       : No active profile set, falling back to 1 default profile: "default"
+2022-12-12T21:22:54.356+05:00  INFO 17344 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-12T21:22:54.437+05:00  INFO 17344 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 8 JPA repository interfaces.
+2022-12-12T21:22:54.952+05:00  INFO 17344 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-12T21:22:54.969+05:00  INFO 17344 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-12T21:22:54.970+05:00  INFO 17344 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.1]
+2022-12-12T21:22:55.100+05:00  INFO 17344 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-12T21:22:55.100+05:00  INFO 17344 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1981 ms
+2022-12-12T21:22:55.155+05:00 DEBUG 17344 --- [main] com.example.kunuz.config.TokenFilter     : Filter 'tokenFilter' configured for use
+2022-12-12T21:22:55.265+05:00  INFO 17344 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-12T21:22:55.316+05:00  INFO 17344 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.5.Final
+2022-12-12T21:22:55.499+05:00  WARN 17344 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2022-12-12T21:22:55.660+05:00  INFO 17344 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-12T21:22:56.126+05:00  INFO 17344 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@482ba4b1
+2022-12-12T21:22:56.127+05:00  INFO 17344 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-12T21:22:56.383+05:00  INFO 17344 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-12-12T21:22:57.710+05:00  INFO 17344 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-12T21:22:57.718+05:00  INFO 17344 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T21:22:58.390+05:00  WARN 17344 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-12T21:22:58.707+05:00  INFO 17344 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-12T21:22:58.724+05:00  INFO 17344 --- [main] com.example.kunuz.KunUzApplication       : Started KunUzApplication in 6.289 seconds (process running for 7.143)
+2022-12-12T21:22:58.839+05:00  INFO 17344 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-12T21:22:58.841+05:00  INFO 17344 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-12T21:22:58.842+05:00  INFO 17344 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-12T21:22:58.946+05:00 DEBUG 17344 --- [http-nio-8080-exec-1] c.e.kunuz.controller.AuthController      : Lod debug : LoginDTO{email='nazarovazimon888@gmail.com'}
+2022-12-12T21:22:58.946+05:00  WARN 17344 --- [http-nio-8080-exec-1] c.e.kunuz.controller.AuthController      : Log warn : LoginDTO{email='nazarovazimon888@gmail.com'}
+2022-12-12T21:22:58.948+05:00 ERROR 17344 --- [http-nio-8080-exec-1] c.e.kunuz.controller.AuthController      : Log error : LoginDTO{email='nazarovazimon888@gmail.com'}
+2022-12-12T21:22:58.948+05:00  INFO 17344 --- [http-nio-8080-exec-1] c.e.kunuz.controller.AuthController      : Authorization : LoginDTO{email='nazarovazimon888@gmail.com'}
