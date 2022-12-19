@@ -1,18 +1,21 @@
 package com.example.kunuz.service;
 
 import com.example.kunuz.dto.article.ArticleCreateDTO;
+import com.example.kunuz.dto.article.ArticleFilterDTO;
 import com.example.kunuz.dto.article.ArticleResponseDTO;
 import com.example.kunuz.dto.article.ArticleShortInfoDTO;
 import com.example.kunuz.entity.RegionEntity;
 import com.example.kunuz.entity.article.ArticleEntity;
 import com.example.kunuz.entity.article.ArticleTypeEntity;
 import com.example.kunuz.enums.ArticleStatus;
+import com.example.kunuz.enums.Language;
 import com.example.kunuz.enums.LikeStatus;
 import com.example.kunuz.exp.ArticleNotFoundException;
 import com.example.kunuz.exp.ArticleNotPublishedException;
 import com.example.kunuz.mapper.ArticleShortInfoMapper;
 import com.example.kunuz.mapper.IArticleShortInfoMapper;
 import com.example.kunuz.repository.ArticleRepository;
+import com.example.kunuz.repository.custom.ArticleCustomRepository;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,7 @@ import java.util.Optional;
 @Service
 public class ArticleService {
     private final ArticleRepository repository;
+    private final ArticleCustomRepository customRepository;
 
     private final ArticleTypeService articleTypeService;
 
@@ -33,13 +37,16 @@ public class ArticleService {
 
     private final RegionService regionService;
     private final AttachService attachService;
+    private final ResourceBundleService resourceBundleService;
 
-    public ArticleService(ArticleRepository repository, ArticleTypeService articleTypeService, ProfileService profileService, RegionService regionService, AttachService attachService) {
+    public ArticleService(ArticleRepository repository, ArticleCustomRepository customRepository, ArticleTypeService articleTypeService, ProfileService profileService, RegionService regionService, AttachService attachService, ResourceBundleService resourceBundleService) {
         this.repository = repository;
+        this.customRepository = customRepository;
         this.articleTypeService = articleTypeService;
         this.profileService = profileService;
         this.regionService = regionService;
         this.attachService = attachService;
+        this.resourceBundleService = resourceBundleService;
     }
 
     public ArticleResponseDTO create(ArticleCreateDTO dto, Integer profileId) {
@@ -69,9 +76,9 @@ public class ArticleService {
     }
 
 
-    public Boolean update(String id, ArticleCreateDTO dto, Integer profileId) {
+    public Boolean update(String id, ArticleCreateDTO dto, Integer profileId, Language language) {
 
-        ArticleEntity entity = getById(id);
+        ArticleEntity entity = getById(id, language);
 
 
         entity.setArticleTypeId(dto.getArticleTypeId());
@@ -93,23 +100,23 @@ public class ArticleService {
         return true;
     }
 
-    public ArticleEntity getById(String id) {
+    public ArticleEntity getById(String id, Language language) {
         Optional<ArticleEntity> optional = repository.findById(id);
         if (optional.isEmpty()) {
-            throw new ArticleNotFoundException("Article Not Found");
+            throw new ArticleNotFoundException(resourceBundleService.getMessage("not.found", language, "Article"));
         }
         return optional.get();
     }
 
-    public boolean delete(String id) {
-        getById(id);
+    public boolean delete(String id, Language language) {
+        getById(id, language);
         repository.deleteById(id);
 
         return true;
     }
 
-    public boolean changeStatus(String id, Integer profileId) {
-        ArticleEntity entity = getById(id);
+    public boolean changeStatus(String id, Integer profileId, Language language) {
+        ArticleEntity entity = getById(id, language);
         entity.setStatus(ArticleStatus.PUBLISHED);
         entity.setPublisherId(profileId);
         entity.setPublishedDate(LocalDateTime.now());
@@ -119,51 +126,51 @@ public class ArticleService {
         return true;
     }
 
-    public List<ArticleShortInfoDTO> getLast5(Integer id) {
+    public List<ArticleShortInfoDTO> getLast5(Integer id, Language language) {
 
-        ArticleTypeEntity articleType = articleTypeService.getById(id);
+        ArticleTypeEntity articleType = articleTypeService.getById(id, language);
         List<IArticleShortInfoMapper> iMapperList = repository.findTop5(articleType, ArticleStatus.PUBLISHED);
 
         List<ArticleShortInfoDTO> dtoList = new ArrayList<>();
 
         for (IArticleShortInfoMapper iMapper : iMapperList) {
-            dtoList.add(getShortDTO(iMapper));
+            dtoList.add(getShortDTO(iMapper, language));
         }
         return dtoList;
     }
 
-    private ArticleShortInfoDTO getShortDTO(IArticleShortInfoMapper mapper) {
+    private ArticleShortInfoDTO getShortDTO(IArticleShortInfoMapper mapper, Language language) {
         ArticleShortInfoDTO dto = new ArticleShortInfoDTO();
         dto.setTitle(mapper.getTitle());
         dto.setDescription(mapper.getDescription());
         dto.setPublishedDate(mapper.getPublishedDate());
         dto.setPublishedDate(mapper.getPublishedDate());
-        dto.setImage(attachService.getById(mapper.getImageId()));
+        dto.setImage(attachService.getById(mapper.getImageId(), language));
         return dto;
     }
 
-    public List<ArticleShortInfoDTO> getLast3(Integer id) {
+    public List<ArticleShortInfoDTO> getLast3(Integer id, Language language) {
 
-        ArticleTypeEntity articleType = articleTypeService.getById(id);
+        ArticleTypeEntity articleType = articleTypeService.getById(id, language);
 
         List<IArticleShortInfoMapper> iMapperList = repository.findTop3(articleType, ArticleStatus.PUBLISHED);
 
         List<ArticleShortInfoDTO> dtoList = new ArrayList<>();
 
         for (IArticleShortInfoMapper iMapper : iMapperList) {
-            dtoList.add(getShortDTO(iMapper));
+            dtoList.add(getShortDTO(iMapper, language));
         }
 
         return dtoList;
     }
 
 
-    public List<ArticleShortInfoDTO> getLast8(List<String> idList) {
+    public List<ArticleShortInfoDTO> getLast8(List<String> idList, Language language) {
 
         List<IArticleShortInfoMapper> iMapperList = repository.getLast8Native(ArticleStatus.PUBLISHED, idList);
 
         List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
-        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper)));
+        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper, language)));
 
         return dtoList;
     }
@@ -198,36 +205,36 @@ public class ArticleService {
 
     }
 
-    public List<ArticleShortInfoDTO> getLast4ByType1(String id, Integer typeId) {
+    public List<ArticleShortInfoDTO> getLast4ByType1(String id, Integer typeId, Language language) {
         List<IArticleShortInfoMapper> iMapperList = repository.getLast4ByType1(typeId, id, ArticleStatus.PUBLISHED);
         List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
-        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper)));
+        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper, language)));
         return dtoList;
     }
 
-    public List<ArticleShortInfoDTO> getTop4() {
+    public List<ArticleShortInfoDTO> getTop4(Language language) {
         List<IArticleShortInfoMapper> iMapperList = repository.getTop4();
         List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
-        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper)));
+        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper, language)));
         return dtoList;
     }
 
-    public List<ArticleShortInfoDTO> getLast4ByType2(Integer typeId) {
+    public List<ArticleShortInfoDTO> getLast4ByType2(Integer typeId, Language language) {
 
         List<IArticleShortInfoMapper> iMapperList = repository.getLast4ByType2(typeId);
         List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
-        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper)));
+        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper, language)));
         return dtoList;
     }
 
 
-    public List<ArticleShortInfoDTO> getLast5ByTypeAndRegion(Integer typeId, String regionKey) {
+    public List<ArticleShortInfoDTO> getLast5ByTypeAndRegion(Integer typeId, String regionKey, Language language) {
 
         RegionEntity region = regionService.getByKey(regionKey);
 
         List<IArticleShortInfoMapper> iMapperList = repository.getLast5ByTypeAndRegionKey(typeId, region.getId());
         List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
-        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper)));
+        iMapperList.forEach(iMapper -> dtoList.add(getShortDTO(iMapper, language)));
         return dtoList;
     }
 
@@ -252,20 +259,20 @@ public class ArticleService {
     }
 
 
-    public void like(String id) {
-        ArticleEntity article = getById(id);
+    public void like(String id, Language language) {
+        ArticleEntity article = getById(id, language);
         article.setLikeCount(article.getLikeCount() + 1);
         repository.save(article);
     }
 
-    public void dislike(String id) {
-        ArticleEntity article = getById(id);
+    public void dislike(String id, Language language) {
+        ArticleEntity article = getById(id, language);
         article.setDislikeCount(article.getDislikeCount() + 1);
         repository.save(article);
     }
 
-    public void remove(String id, LikeStatus status) {
-        ArticleEntity entity = getById(id);
+    public void remove(String id, LikeStatus status, Language language) {
+        ArticleEntity entity = getById(id, language);
 
         if (status.equals(LikeStatus.LIKE)) {
             entity.setLikeCount(entity.getLikeCount() - 1);
@@ -275,6 +282,38 @@ public class ArticleService {
 
         repository.save(entity);
 
+    }
+
+    public Boolean increaseViewCount(String id, Language language) {
+        ArticleEntity entity = getById(id, language);
+        entity.setViewCount(entity.getViewCount() + 1);
+
+        repository.save(entity);
+        return true;
+
+    }
+
+    public Boolean increaseShareCount(String id, Language language) {
+        ArticleEntity entity = getById(id, language);
+        entity.setSharedCount(entity.getSharedCount() + 1);
+        repository.save(entity);
+        return true;
+    }
+
+    public Page<ArticleShortInfoDTO> filter(ArticleFilterDTO filterDTO, int page, int size) {
+        Page<ArticleEntity> list = customRepository.filter(filterDTO, page, size);
+
+        List<ArticleShortInfoDTO> dtoList = new ArrayList<>();
+        for (ArticleEntity entity : list) {
+            ArticleShortInfoDTO dto = new ArticleShortInfoDTO();
+            dto.setTitle(entity.getTitle());
+            dto.setDescription(entity.getDescription());
+            dto.setImage(attachService.getById(entity.getImageId(), Language.EN));
+            dto.setPublishedDate(entity.getPublishedDate());
+
+            dtoList.add(dto);
+        }
+        return new PageImpl<>(dtoList, PageRequest.of(page, size), list.getTotalElements());
     }
 
 }

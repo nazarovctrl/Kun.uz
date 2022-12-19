@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/init")
 public class InitController {
@@ -25,17 +26,17 @@ public class InitController {
 
 
     @GetMapping("/admin")
-    public String initDmin() {
-        ProfileEntity exists = repository.findByEmail("admin@gmail.com");
+    public String initAdmin() {
+        Optional<ProfileEntity> exists = repository.findByEmail("admin@gmail.com");
 
-        if (exists != null) {
+        if (exists.isPresent()) {
             return "Already  exists";
         }
         ProfileEntity entity = new ProfileEntity();
         entity.setName("Admin");
         entity.setSurname("Adminjon");
         entity.setEmail("admin@gmail.com");
-        entity.setRole(ProfileRole.ADMIN);
+        entity.setRole(ProfileRole.ROLE_ADMIN);
         entity.setPassword(MD5.md5("200622az"));
         entity.setCreatedDate(LocalDateTime.now());
         entity.setStatus(ProfileStatus.ACTIVE);

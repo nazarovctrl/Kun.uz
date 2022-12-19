@@ -29,4 +29,15 @@ public class ArticleTypeDTO {
 
     private LocalDateTime createdDate;
 
+    @Override
+    public String toString() {
+        return "ArticleTypeDTO{" +
+                "id=" + id +
+                ", key='" + key + '\'' +
+                ", nameUz='" + nameUz + '\'' +
+                ", nameRu='" + nameRu + '\'' +
+                ", nameEn='" + nameEn + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
+    }
 }

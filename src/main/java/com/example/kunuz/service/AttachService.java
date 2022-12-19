@@ -2,9 +2,13 @@ package com.example.kunuz.service;
 
 import com.example.kunuz.dto.attach.AttachResponseDTO;
 import com.example.kunuz.entity.AttachEntity;
+import com.example.kunuz.enums.Language;
 import com.example.kunuz.exp.AttachNotFoundException;
+import com.example.kunuz.exp.CouldNotRead;
 import com.example.kunuz.exp.OriginalFileNameNullException;
+import com.example.kunuz.exp.SomethingWentWrong;
 import com.example.kunuz.repository.AttachRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -24,6 +28,8 @@ import java.util.*;
 
 @Service
 public class AttachService {
+
+
     private final AttachRepository repository;
 
     @Value("${attach.upload.folder}")
@@ -32,11 +38,14 @@ public class AttachService {
     @Value("${attach.download.url}")
     private String attachDownloadUrl;
 
-    public AttachService(AttachRepository repository) {
+    private final ResourceBundleService resourceBundleService;
+
+    public AttachService(AttachRepository repository, ResourceBundleService resourceBundleService) {
         this.repository = repository;
+        this.resourceBundleService = resourceBundleService;
     }
 
-    public AttachResponseDTO saveToSystem(MultipartFile file) {
+    public AttachResponseDTO saveToSystem(MultipartFile file,Language language) {
         try {
 
             String pathFolder = getYmDString(); // 2022/04/23
@@ -46,7 +55,7 @@ public class AttachService {
 
 
             String fileName = UUID.randomUUID().toString(); // dasdasd-dasdasda-asdasda-asdasd
-            String extension = getExtension(file.getOriginalFilename()); //zari.jpg
+            String extension = getExtension(file.getOriginalFilename(),language); //zari.jpg
 
             // attaches/2022/04/23/dasdasd-dasdasda-asdasda-asdasd.jpg
             byte[] bytes = file.getBytes();
@@ -109,7 +118,7 @@ public class AttachService {
 
     }
 
-    public Resource download(String fileName) {
+    public Resource download(String fileName, Language language) {
         try {
             AttachEntity entity = getAttach(fileName);
 
@@ -124,10 +133,10 @@ public class AttachService {
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {
-                throw new RuntimeException("Could not read the file!");
+                throw new CouldNotRead(resourceBundleService.getMessage("could.not.read",language));
             }
         } catch (MalformedURLException e) {
-            throw new RuntimeException("Error: " + e.getMessage());
+            throw new SomethingWentWrong(resourceBundleService.getMessage("wrong",language));
         }
     }
 
@@ -139,10 +148,10 @@ public class AttachService {
         return year + "/" + month + "/" + day; // 2022/04/23
     }
 
-    public String getExtension(String fileName) {
+    public String getExtension(String fileName,Language language) {
         // mp3/jpg/npg/mp4.....
         if (fileName == null) {
-            throw new OriginalFileNameNullException("Original File Name Null");
+            throw new OriginalFileNameNullException(resourceBundleService.getMessage("file.name.null",language));
         }
         int lastIndex = fileName.lastIndexOf(".");
         return fileName.substring(lastIndex + 1);
@@ -201,10 +210,10 @@ public class AttachService {
     }
 
 
-    public String getById(String imageId) {
+    public String getById(String imageId,Language language) {
         Optional<AttachEntity> optional = repository.findById(imageId);
         if (optional.isEmpty()) {
-            throw new AttachNotFoundException("Attach Not Found");
+            throw new AttachNotFoundException(resourceBundleService.getMessage("not.found",language,"Attach"));
         }
         return attachDownloadUrl + optional.get().getId() + "." + optional.get().getExtension();
 

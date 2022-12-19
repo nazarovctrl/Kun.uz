@@ -1,0 +1,40 @@
+### comment create
+POST localhost:8080/comment/sec/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzExOTM5MzUsImlkIjo0LCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3MTI4MDMzNSwiaXNzIjoia3VudXogdGVzdCBwb3J0YWxpIn0.UYHgJv_NqGXKK3qLlMs5CzM00IQewbLzZjxYGb_HrwpiOmpG0pLGEDmMnP-Yy29bCZdOQ0tNqsvekLAurOVOpA
+Content-Type: application/json
+
+{
+  "content": "Nega like ishlamoti",
+  "articleId": "3a0b2c3a-6d42-4ed8-b051-e70b55f3e488"
+}
+
+
+### update
+PUT localhost:8080/comment/sec/update
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzEwMDg2NzgsImlkIjo0LCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3MTA5NTA3OCwiaXNzIjoia3VudXogdGVzdCBwb3J0YWxpIn0.d6r7_j-qnjlB-SumoQepmf4I1hljSgx73CODOYhIzbF4Qbp3SuXPsPlmU6yDnBIBLfAOgOllsDBgulrYVVbxDg
+Content-Type: application/json
+Accept-Language: RU
+
+{
+  "content": "Salom jigar nima gap vapshe yomonu",
+  "commentId": 1
+}
+
+
+### delete
+DELETE localhost:8080/comment/sec/delete/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzEwMDg2NzgsImlkIjo0LCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3MTA5NTA3OCwiaXNzIjoia3VudXogdGVzdCBwb3J0YWxpIn0.d6r7_j-qnjlB-SumoQepmf4I1hljSgx73CODOYhIzbF4Qbp3SuXPsPlmU6yDnBIBLfAOgOllsDBgulrYVVbxDg
+Accept-Language: EN
+
+
+### get list by article id
+GET localhost:8080/comment/get/3a0b2c3a-6d42-4ed8-b051-e70b55f3e488
+
+
+### get with pagination
+GET localhost:8080/comment/sec/get?page=0&size=3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzEwMTMxODIsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2NzEwOTk1ODIsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.7CHZnQxbkCH7IC0AjmYI_QUInHPI6gn2eYN9EcjPHS63WfIqix5mGd1qGMrMzU9bVFfp2pZJuNn7QmC8-xJDcw
+
+
+### get reply list
+GET  localhost:8080/comment/get_reply/2

@@ -4,6 +4,7 @@ import com.example.kunuz.dto.article.ArticleShortInfoDTO;
 import com.example.kunuz.dto.article.SavedArticleResponseDTO;
 import com.example.kunuz.entity.article.ArticleEntity;
 import com.example.kunuz.entity.article.SavedArticleEntity;
+import com.example.kunuz.enums.Language;
 import com.example.kunuz.exp.ArticleAlreadySaved;
 import com.example.kunuz.exp.ArticleNotFoundException;
 import com.example.kunuz.repository.SavedArticleRepository;
@@ -49,7 +50,7 @@ public class SavedArticleService {
         return true;
     }
 
-    public List<SavedArticleResponseDTO> getList(Integer profileId) {
+    public List<SavedArticleResponseDTO> getList(Integer profileId, Language language) {
         List<SavedArticleEntity> entityList = repository.findByProfileId(profileId);
         List<SavedArticleResponseDTO> dtoList = new ArrayList<>();
 
@@ -64,7 +65,7 @@ public class SavedArticleService {
             articleDTO.setDescription(articleEntity.getDescription());
             articleDTO.setPublishedDate(articleEntity.getPublishedDate());
             articleDTO.setPublishedDate(articleEntity.getPublishedDate());
-            articleDTO.setImage(attachService.getById(articleEntity.getImageId()));
+            articleDTO.setImage(attachService.getById(articleEntity.getImageId(),language));
 
             dto.setArticleShortInfoDTO(articleDTO);
 

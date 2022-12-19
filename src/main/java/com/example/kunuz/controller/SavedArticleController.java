@@ -1,17 +1,18 @@
 package com.example.kunuz.controller;
 
+import com.example.kunuz.config.security.CustomUserDetail;
 import com.example.kunuz.dto.article.SavedArticleResponseDTO;
-import com.example.kunuz.enums.ProfileRole;
+import com.example.kunuz.enums.Language;
 import com.example.kunuz.service.SavedArticleService;
-import com.example.kunuz.util.HttpRequestUtil;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/saved_article")
 public class SavedArticleController {
@@ -23,25 +24,34 @@ public class SavedArticleController {
     }
 
     @PostMapping("/create/{article_id}")
-    public ResponseEntity<?> create(@PathVariable("article_id") String articleId, HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.USER);
-        Boolean result = service.create(articleId, profileId);
+    public ResponseEntity<?> create(@PathVariable("article_id") String articleId)  {
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetail user = (CustomUserDetail) authentication.getPrincipal();
+
+        Boolean result = service.create(articleId, user.getId());
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/delete/{article_id}")
-    public ResponseEntity<?> delete(@PathVariable("article_id") String articleId, HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.USER);
-        Boolean result = service.delete(articleId, profileId);
+    public ResponseEntity<?> delete(@PathVariable("article_id") String articleId)  {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetail user = (CustomUserDetail) authentication.getPrincipal();
+
+        Boolean result = service.delete(articleId, user.getId());
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/get_list")
-    public ResponseEntity<?> getList(HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.USER);
-        List<SavedArticleResponseDTO> result = service.getList(profileId);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> getList(@RequestHeader(value = "Accept-Language",defaultValue = "RU") Language language) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetail user = (CustomUserDetail) authentication.getPrincipal();
+
+        List<SavedArticleResponseDTO> result = service.getList(user.getId(),language);
+        return ResponseEntity.ok(result);
     }
 
 }

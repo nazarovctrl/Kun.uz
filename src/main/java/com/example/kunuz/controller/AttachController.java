@@ -1,7 +1,11 @@
 package com.example.kunuz.controller;
 
 import com.example.kunuz.dto.attach.AttachResponseDTO;
+import com.example.kunuz.enums.Language;
+import com.example.kunuz.enums.ProfileRole;
 import com.example.kunuz.service.AttachService;
+import com.example.kunuz.util.HttpRequestUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.io.*;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -22,8 +26,9 @@ public class AttachController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
-        AttachResponseDTO fileName = service.saveToSystem(file);
+    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file,
+                                    @RequestHeader(value = "Accept-Language", defaultValue = "RU") Language language) {
+        AttachResponseDTO fileName = service.saveToSystem(file, language);
         return ResponseEntity.ok().body(fileName);
     }
 
@@ -39,8 +44,9 @@ public class AttachController {
     }
 
     @GetMapping("/download/{fineName}")
-    public ResponseEntity<Resource> download(@PathVariable("fineName") String fileName) {
-        Resource file = service.download(fileName);
+    public ResponseEntity<Resource> download(@PathVariable("fineName") String fileName,
+                                             @RequestHeader(value = "Accept-Language", defaultValue = "RU") Language language) {
+        Resource file = service.download(fileName, language);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
@@ -54,7 +60,9 @@ public class AttachController {
 
 
     @GetMapping("/get")
-    public ResponseEntity<?> getWithPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+    public ResponseEntity<?> getWithPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size,
+                                         HttpServletRequest request) {
+        HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
         Page<AttachResponseDTO> result = service.getWithPage(page, size);
         return ResponseEntity.ok(result);
     }

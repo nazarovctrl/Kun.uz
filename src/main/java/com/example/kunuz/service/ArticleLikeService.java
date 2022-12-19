@@ -1,9 +1,10 @@
 package com.example.kunuz.service;
 
 import com.example.kunuz.entity.article.ArticleLikeEntity;
+import com.example.kunuz.enums.Language;
 import com.example.kunuz.enums.LikeStatus;
 import com.example.kunuz.exp.ArticleLikeAlreadyExists;
-import com.example.kunuz.exp.ArticleLikeNotFound;
+import com.example.kunuz.exp.ArticleNotFoundException;
 import com.example.kunuz.repository.ArticleLikeRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +14,19 @@ import java.time.LocalDateTime;
 public class ArticleLikeService {
     private final ArticleLikeRepository repository;
     private final ArticleService articleService;
+    private final ResourceBundleService resourceBundleService;
 
-    public ArticleLikeService(ArticleLikeRepository repository, ArticleService articleService) {
+    public ArticleLikeService(ArticleLikeRepository repository, ArticleService articleService, ResourceBundleService resourceBundleService) {
         this.repository = repository;
         this.articleService = articleService;
+        this.resourceBundleService = resourceBundleService;
     }
 
-    public Boolean like(String articleId, Integer profileId) {
+    public Boolean like(String articleId, Integer profileId, Language language) {
 
         ArticleLikeEntity exists = repository.findByArticleIdAndProfileId(articleId, profileId);
         if (exists != null) {
-            throw new ArticleLikeAlreadyExists("Article Like Already Exists");
+            throw new ArticleLikeAlreadyExists(resourceBundleService.getMessage("exists", language, "Article like"));
         }
 
         ArticleLikeEntity entity = new ArticleLikeEntity();
@@ -32,7 +35,7 @@ public class ArticleLikeService {
         entity.setStatus(LikeStatus.LIKE);
         entity.setCreatedDate(LocalDateTime.now());
 
-        articleService.like(articleId);
+        articleService.like(articleId,language);
 
         repository.save(entity);
 
@@ -40,11 +43,11 @@ public class ArticleLikeService {
 
     }
 
-    public Boolean dislike(String articleId, Integer profileId) {
+    public Boolean dislike(String articleId, Integer profileId, Language language) {
 
         ArticleLikeEntity exists = repository.findByArticleIdAndProfileId(articleId, profileId);
         if (exists != null) {
-            throw new ArticleLikeAlreadyExists("Article Dislike Already Exists");
+            throw new ArticleLikeAlreadyExists(resourceBundleService.getMessage("exists", language, "Article dislike"));
         }
 
         ArticleLikeEntity entity = new ArticleLikeEntity();
@@ -53,7 +56,7 @@ public class ArticleLikeService {
         entity.setStatus(LikeStatus.DISLIKE);
         entity.setCreatedDate(LocalDateTime.now());
 
-        articleService.dislike(articleId);
+        articleService.dislike(articleId,language);
 
         repository.save(entity);
 
@@ -61,13 +64,13 @@ public class ArticleLikeService {
     }
 
 
-    public Boolean remove(String articleId, Integer profileId) {
+    public Boolean remove(String articleId, Integer profileId, Language language) {
         ArticleLikeEntity entity = repository.findByArticleIdAndProfileId(articleId, profileId);
         if (entity == null) {
-            throw new ArticleLikeNotFound("Article Like not Found");
+            throw new ArticleNotFoundException(resourceBundleService.getMessage("not.found", language, "ArticleLike"));
         }
 
-        articleService.remove(articleId, entity.getStatus());
+        articleService.remove(articleId, entity.getStatus(),language);
         repository.delete(entity);
         return true;
     }

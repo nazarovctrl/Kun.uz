@@ -35,7 +35,10 @@ GET localhost:8080/article/user/get_last8
 Content-Type: application/json
 
 {
-  "list": ["1","2"]
+  "list": [
+    "1",
+    "2"
+  ]
 }
 
 ### get by id
@@ -56,4 +59,12 @@ GET localhost:8080/article/user/get_last5_by_type_and_region?type_id=1&region=To
 
 ### get with paginatin
 GET localhost:8080/article/user/get_list_by_type/Tosh?page=0&size=10
+
+### filter
+POST localhost:8080/article/filter?page=0&size=10
+Content-Type: application/json
+
+{
+  "status": "PUBLISHED"
+}
 

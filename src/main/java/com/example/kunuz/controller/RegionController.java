@@ -2,10 +2,7 @@ package com.example.kunuz.controller;
 
 import com.example.kunuz.dto.region.RegionDTO;
 import com.example.kunuz.dto.region.RegionShortDTO;
-import com.example.kunuz.enums.ProfileRole;
 import com.example.kunuz.service.RegionService;
-import com.example.kunuz.util.HttpRequestUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,29 +20,22 @@ public class RegionController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody RegionDTO dto,
-                                    HttpServletRequest request) {
+    public ResponseEntity<?> create(@RequestBody RegionDTO dto) {
 
-        HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
         RegionDTO result = service.create(dto);
-
         return ResponseEntity.ok(result);
     }
 
 
     @PutMapping("/{id}")
-    private ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody RegionDTO dto,
-                                     HttpServletRequest request) {
+    private ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody RegionDTO dto) {
 
-        HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
         RegionDTO result = service.update(id, dto);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") Integer id,
-                                        HttpServletRequest request) {
-        HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
+    public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
 
         Boolean result = service.deleteById(id);
         return ResponseEntity.ok(result);
@@ -54,19 +44,15 @@ public class RegionController {
 
     @GetMapping("/list")
     public ResponseEntity<?> getList(@RequestParam("page") Integer page,
-                                     @RequestParam("size") Integer size,
-                                     HttpServletRequest request) {
+                                     @RequestParam("size") Integer size) {
 
-        HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
         Page<RegionDTO> result = service.getList(page, size);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/byLang/{lang}")
-    public ResponseEntity<?> getByLang(@PathVariable("lang") String lang,
-                                       HttpServletRequest request) {
+    public ResponseEntity<?> getByLang(@PathVariable("lang") String lang) {
 
-        HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
         List<RegionShortDTO> result = service.getByLang(lang);
         return ResponseEntity.ok(result);
     }

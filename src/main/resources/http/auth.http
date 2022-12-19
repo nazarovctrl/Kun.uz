@@ -4,16 +4,17 @@ Content-Type: application/json
 
 {
   "name": "Azimjon",
-  "surname": "Nazarov"
+  "surname": "Nazarov",
+  "email": "nazarovazimjon3@gmail.com",
+  "password": "200622az"
 }
 
 ### login
 POST localhost:8080/auth/login
 Content-Type: application/json
-Accept-Language: RU
 
 {
-  "email": "nazarovazimon888@gmail.com",
+  "email": "nazarovazimjon3@gmail.com",
   "password": "200622az"
 }
 

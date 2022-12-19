@@ -108,6 +108,26 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
+    @ExceptionHandler({OnlyOwnerCaneUpdate.class})
+    private ResponseEntity<?> handler(OnlyOwnerCaneUpdate e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler({CouldNotRead.class})
+    private ResponseEntity<?> handler(CouldNotRead e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler({CommentLikeNotFound.class})
+    private ResponseEntity<?> handler(CommentLikeNotFound e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({CommentLikeAlreadyExists.class})
+    private ResponseEntity<?> handler(CommentLikeAlreadyExists e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
 
 }
 

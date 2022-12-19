@@ -14,11 +14,13 @@ import com.example.kunuz.repository.ProfileRepository;
 import com.example.kunuz.util.JwtUtil;
 import com.example.kunuz.util.MD5;
 import io.jsonwebtoken.JwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AuthService {
     private final ProfileRepository repository;
@@ -37,10 +39,11 @@ public class AuthService {
 
 
     public ProfileResponseDTO registration(UserRegistrationDTO dto, Language language) {
-        ProfileEntity exists = repository.findByEmail(dto.getEmail());
-        if (exists != null) {
-            if (exists.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
-                repository.delete(exists);
+       Optional<ProfileEntity> exists = repository.findByEmail(dto.getEmail());
+        if (exists.isPresent()) {
+            ProfileEntity entity = exists.get();
+            if (entity.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
+                repository.delete(entity);
             } else {
                 throw new EmailAlreadyExistsException(resourceBundleService.getMessage("email.exists", language));
             }
@@ -61,7 +64,7 @@ public class AuthService {
         entity.setVisible(true);
         entity.setStatus(ProfileStatus.NOT_ACTIVE);
         entity.setCreatedDate(LocalDateTime.now());
-        entity.setRole(ProfileRole.USER);
+        entity.setRole(ProfileRole.ROLE_USER);
 
         repository.save(entity);
 

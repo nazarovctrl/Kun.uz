@@ -28,6 +28,7 @@ public class ProfileResponseDTO {
     public ProfileResponseDTO() {
     }
 
+
     public ProfileResponseDTO(Integer id, String name, String surname, ProfileStatus status, ProfileRole role, Boolean visible, LocalDateTime createdDate) {
         this.id = id;
         this.name = name;

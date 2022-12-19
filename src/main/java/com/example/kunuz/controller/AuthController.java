@@ -29,15 +29,16 @@ public class AuthController {
 
     @Operation(summary = "Method for registration", description = "This method used to create a user")
     @PostMapping("/registration")
-    private ResponseEntity<?> registration(@Valid @RequestBody UserRegistrationDTO dto,@RequestHeader(value = "Accept-Language", defaultValue = "ru")Language language) {
+    private ResponseEntity<ProfileResponseDTO> registration(@Valid @RequestBody UserRegistrationDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "RU") Language language) {
         log.info("Registration : email {}, name {}", dto.getEmail(), dto.getName());
-        ProfileResponseDTO result = service.registration(dto,language);
+        ProfileResponseDTO result = service.registration(dto, language);
         return ResponseEntity.ok(result);
     }
 
     @Operation(summary = "Method fro verification", description = "This method used to verifying by email after registration")
     @GetMapping("/verification/email/{jwt}")
-    private ResponseEntity<?> verification(@PathVariable("jwt") String jwt) {
+    private ResponseEntity<String> verification(@PathVariable("jwt") String jwt) {
+        log.info("Verification: jwt {}", jwt);
         String result = service.verification(jwt);
         return ResponseEntity.ok(result);
     }
@@ -45,15 +46,10 @@ public class AuthController {
 
     @Operation(summary = "Method for authorization", description = "This method used for Login")
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "ru") Language language) {
-        log.trace("Log trace : " + dto);
-        log.debug("Lod debug : " + dto);
-        log.warn("Log warn : " + dto);
-        log.error("Log error : " + dto);
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO dto, @RequestHeader(value = "Accept-Language", defaultValue = "RU") Language language) {
 
 
-        log.info("Authorization : " + dto);
-
+        log.info(" Login :  email {} " ,dto.getEmail());
         LoginResponseDTO response = service.login(dto, language);
         return ResponseEntity.ok(response);
     }

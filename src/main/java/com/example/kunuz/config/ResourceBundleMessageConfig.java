@@ -8,7 +8,6 @@ import java.util.Locale;
 
 @Configuration
 public class ResourceBundleMessageConfig {
-
     @Bean
     public ResourceBundleMessageSource getMessageResource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

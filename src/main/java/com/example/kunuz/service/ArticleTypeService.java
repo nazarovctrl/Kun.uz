@@ -3,6 +3,7 @@ package com.example.kunuz.service;
 import com.example.kunuz.dto.article.ArticleTypeShortDTO;
 import com.example.kunuz.dto.article.ArticleTypeDTO;
 import com.example.kunuz.entity.article.ArticleTypeEntity;
+import com.example.kunuz.enums.Language;
 import com.example.kunuz.exp.ArticleTypeNotFoundException;
 import com.example.kunuz.mapper.IArticleTypeMapper;
 import com.example.kunuz.repository.ArticleTypeRepository;
@@ -22,8 +23,11 @@ import java.util.Optional;
 public class ArticleTypeService {
     private final ArticleTypeRepository repository;
 
-    public ArticleTypeService(ArticleTypeRepository repository) {
+    private final ResourceBundleService resourceBundleService;
+
+    public ArticleTypeService(ArticleTypeRepository repository, ResourceBundleService resourceBundleService) {
         this.repository = repository;
+        this.resourceBundleService = resourceBundleService;
     }
 
 
@@ -48,9 +52,9 @@ public class ArticleTypeService {
         return entity;
     }
 
-    public ArticleTypeDTO update(Integer id, ArticleTypeDTO dto) {
+    public ArticleTypeDTO update(Integer id, ArticleTypeDTO dto,Language language) {
 
-        ArticleTypeEntity byId = getById(id);
+        ArticleTypeEntity byId = getById(id,language);
 
 
         ArticleTypeEntity entity = getEntity(dto);
@@ -62,8 +66,8 @@ public class ArticleTypeService {
         return dto;
     }
 
-    public Boolean deleteById(Integer id) {
-        getById(id);
+    public Boolean deleteById(Integer id,Language language) {
+        getById(id,language);
         repository.deleteById(id);
         return true;
 
@@ -114,11 +118,11 @@ public class ArticleTypeService {
     }
 
 
-    public ArticleTypeEntity getById(Integer id) {
+    public ArticleTypeEntity getById(Integer id, Language language) {
         Optional<ArticleTypeEntity> optional = repository.findById(id);
 
         if (optional.isEmpty()) {
-            throw new ArticleTypeNotFoundException("article type not found");
+            throw new ArticleTypeNotFoundException(resourceBundleService.getMessage("not.found",language,"ArticleType" ));
         }
         return optional.get();
     }

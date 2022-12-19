@@ -1,9 +1,7 @@
 package com.example.kunuz.service;
 
 import com.example.kunuz.dto.auth.AdminRegistrationDTO;
-import com.example.kunuz.dto.profile.ProfileResponseDTO;
-import com.example.kunuz.dto.profile.AdminProfileUpdateDTO;
-import com.example.kunuz.dto.profile.UserProfileUpdateDTO;
+import com.example.kunuz.dto.profile.*;
 import com.example.kunuz.entity.EmailHistoryEntity;
 import com.example.kunuz.entity.ProfileEntity;
 import com.example.kunuz.enums.Language;
@@ -12,6 +10,7 @@ import com.example.kunuz.exp.EmailAlreadyExistsException;
 import com.example.kunuz.exp.ItemNotFoundException;
 import com.example.kunuz.exp.ProfileNotFoundException;
 import com.example.kunuz.repository.ProfileRepository;
+import com.example.kunuz.repository.custom.ProfileCustomRepository;
 import com.example.kunuz.util.JwtUtil;
 import com.example.kunuz.util.MD5;
 import lombok.extern.slf4j.Slf4j;
@@ -33,12 +32,15 @@ public class ProfileService {
     private final EmailHistoryService emailHistoryService;
     private final MailService mailService;
 
+
+    private final ProfileCustomRepository customRepository;
     private final ResourceBundleService resourceBundleService;
 
-    public ProfileService(ProfileRepository repository, EmailHistoryService emailHistoryService, MailService mailService, ResourceBundleService resourceBundleService) {
+    public ProfileService(ProfileRepository repository, EmailHistoryService emailHistoryService, MailService mailService, ProfileCustomRepository customRepository, ResourceBundleService resourceBundleService) {
         this.repository = repository;
         this.emailHistoryService = emailHistoryService;
         this.mailService = mailService;
+        this.customRepository = customRepository;
         this.resourceBundleService = resourceBundleService;
     }
 
@@ -89,10 +91,11 @@ public class ProfileService {
 
     private void checkEmail(String email) {
 
-        ProfileEntity exists = repository.findByEmail(email);
-        if (exists != null) {
-            if (exists.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
-                repository.delete(exists);
+        Optional<ProfileEntity> exists = repository.findByEmail(email);
+        if (exists.isPresent()) {
+            ProfileEntity entity = exists.get();
+            if (entity.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
+                repository.delete(entity);
             } else {
                 throw new EmailAlreadyExistsException("Email already exists");
             }
@@ -102,8 +105,7 @@ public class ProfileService {
 
     private ProfileResponseDTO getDTO(ProfileEntity entity) {
 
-        return new
-                ProfileResponseDTO(entity.getId(),
+        return new ProfileResponseDTO(entity.getId(),
                 entity.getName(), entity.getSurname(),
                 entity.getStatus(), entity.getRole(), entity.getVisible(), entity.getCreatedDate());
     }
@@ -128,7 +130,6 @@ public class ProfileService {
     }
 
     public ProfileResponseDTO updateAdmin(AdminProfileUpdateDTO dto) {
-
 
         ProfileEntity entity = getById(dto.getId());
 
@@ -190,6 +191,15 @@ public class ProfileService {
         dto.setEmail(entity.getEmail());
 
         return dto;
+    }
+
+    public List<ProfileDTO> filter(ProfileFilterDTO filterDTO, int page, int size) {
+        Page<ProfileEntity> list = customRepository.filter(filterDTO, page, size);
+
+        for (ProfileEntity entity : list) {
+            System.out.println(entity.getName());
+        }
+        return null;
     }
 
 }
