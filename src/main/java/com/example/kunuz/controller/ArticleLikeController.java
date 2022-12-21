@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class ArticleLikeController {
     }
 
 
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "ArticleLike  like method")
     @PostMapping("/like/{article_id}")
     public ResponseEntity<?> like(@PathVariable("article_id") String articleId,
@@ -41,6 +43,7 @@ public class ArticleLikeController {
 
     }
 
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "ArticleLike  dislike method")
     @PostMapping("/dislike/{article_id}")
     public ResponseEntity<?> dislike(@PathVariable("article_id") String articleId,
@@ -59,6 +62,7 @@ public class ArticleLikeController {
     }
 
 
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "ArticleLike  remove method")
     @DeleteMapping("/remove/{article_id}")
     public ResponseEntity<?> remove(@PathVariable("article_id") String articleId,

@@ -1,8 +1,7 @@
 ### create
 POST localhost:8080/profile/admin/create
 Content-Type:  application/json
-Authorization: Basic admin@gmail.com d0435003d7ec62e6d7656dff18c42586
-
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzE2MTUyOTMsInVzZXJuYW1lIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2NzE3MDE2OTMsImlzcyI6Imt1bnV6IHRlc3QgcG9ydGFsaSJ9.gdyztZzMZNQD8CuVDH6K0d2ZHGPQTc4sbx9zdT43RNfyTQsFuhr1HD0jlOwKjILUMchbquA7KCp9-fYlZCE6GQ
 
 {
   "name": "publisher",

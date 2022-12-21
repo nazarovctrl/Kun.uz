@@ -1,5 +1,6 @@
 package com.example.kunuz.service;
 
+import com.example.kunuz.dto.JwtDTO;
 import com.example.kunuz.dto.auth.LoginDTO;
 import com.example.kunuz.dto.auth.LoginResponseDTO;
 import com.example.kunuz.dto.profile.ProfileResponseDTO;
@@ -39,7 +40,7 @@ public class AuthService {
 
 
     public ProfileResponseDTO registration(UserRegistrationDTO dto, Language language) {
-       Optional<ProfileEntity> exists = repository.findByEmail(dto.getEmail());
+        Optional<ProfileEntity> exists = repository.findByEmail(dto.getEmail());
         if (exists.isPresent()) {
             ProfileEntity entity = exists.get();
             if (entity.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
@@ -74,7 +75,7 @@ public class AuthService {
                 String sb = "Salom qalaysan \n" +
                         "Bu test message" +
                         "Click the link : http://localhost:8080/auth/verification/email/" +
-                        JwtUtil.encode(entity.getId());
+                        JwtUtil.encode(entity.getEmail(), ProfileRole.ROLE_USER);
                 mailService.sendEmail(dto.getEmail(), "Complete Registration", sb);
 
                 EmailHistoryEntity emailHistoryEntity = new EmailHistoryEntity();
@@ -137,22 +138,22 @@ public class AuthService {
         responseDTO.setName(entity.getName());
         responseDTO.setSurname(entity.getSurname());
         responseDTO.setRole(entity.getRole());
-        responseDTO.setToken(JwtUtil.encode(entity.getId(), entity.getRole()));
+        responseDTO.setToken(JwtUtil.encode(entity.getEmail(), entity.getRole()));
 
         return responseDTO;
     }
 
     public String verification(String jwt) {
 
-        Integer id;
 
+        JwtDTO jwtDTO;
         try {
-            id = JwtUtil.decodeId(jwt);
+            jwtDTO = JwtUtil.decodeToken(jwt);
         } catch (JwtException e) {
             return "Verification failed";
         }
 
-        Optional<ProfileEntity> optional = repository.findById(id);
+        Optional<ProfileEntity> optional = repository.findByEmail(jwtDTO.getUsername());
 
         if (optional.isEmpty()) {
             return "Verification failed";

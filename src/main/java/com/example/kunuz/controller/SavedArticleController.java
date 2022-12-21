@@ -6,6 +6,7 @@ import com.example.kunuz.enums.Language;
 import com.example.kunuz.service.SavedArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,10 @@ public class SavedArticleController {
         this.service = service;
     }
 
-    @PostMapping("/create/{article_id}")
+
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/save/{article_id}")
     public ResponseEntity<?> create(@PathVariable("article_id") String articleId)  {
 
 
@@ -34,6 +38,7 @@ public class SavedArticleController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{article_id}")
     public ResponseEntity<?> delete(@PathVariable("article_id") String articleId)  {
 
@@ -44,7 +49,8 @@ public class SavedArticleController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/get_list")
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/list")
     public ResponseEntity<?> getList(@RequestHeader(value = "Accept-Language",defaultValue = "RU") Language language) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

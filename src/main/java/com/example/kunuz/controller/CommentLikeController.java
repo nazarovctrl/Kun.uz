@@ -3,6 +3,7 @@ package com.example.kunuz.controller;
 import com.example.kunuz.config.security.CustomUserDetail;
 import com.example.kunuz.service.CommentLikeService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ public class CommentLikeController {
         this.service = service;
     }
 
+
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/like/{c_id}")
     public ResponseEntity<?> like(@PathVariable("c_id") Integer id) {
 
@@ -26,6 +29,7 @@ public class CommentLikeController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/dislike/{c_id}")
     public ResponseEntity<?> dislike(@PathVariable("c_id") Integer id) {
 
@@ -35,6 +39,7 @@ public class CommentLikeController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/remove/{c_id}")
     public ResponseEntity<?> remove(@PathVariable("c_id") Integer id) {
 

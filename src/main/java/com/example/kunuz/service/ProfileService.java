@@ -74,7 +74,7 @@ public class ProfileService {
                 String sb = "Salom qalaysan \n" +
                         "Bu test message" +
                         "Click the link : http://localhost:8080/auth/verification/email/" +
-                        JwtUtil.encode(entity.getId());
+                        JwtUtil.encode(entity.getEmail(),entity.getRole());
                 mailService.sendEmail(dto.getEmail(), "Complete Registration", sb);
 
                 EmailHistoryEntity emailHistoryEntity = new EmailHistoryEntity();

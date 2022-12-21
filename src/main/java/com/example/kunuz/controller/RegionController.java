@@ -5,6 +5,7 @@ import com.example.kunuz.dto.region.RegionShortDTO;
 import com.example.kunuz.service.RegionService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class RegionController {
         this.service = service;
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create(@RequestBody RegionDTO dto) {
 
@@ -27,6 +30,7 @@ public class RegionController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     private ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody RegionDTO dto) {
 
@@ -34,6 +38,7 @@ public class RegionController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
 
@@ -42,6 +47,7 @@ public class RegionController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/list")
     public ResponseEntity<?> getList(@RequestParam("page") Integer page,
                                      @RequestParam("size") Integer size) {
@@ -50,6 +56,8 @@ public class RegionController {
         return ResponseEntity.ok(result);
     }
 
+
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/byLang/{lang}")
     public ResponseEntity<?> getByLang(@PathVariable("lang") String lang) {
 

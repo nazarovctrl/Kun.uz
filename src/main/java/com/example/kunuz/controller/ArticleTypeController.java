@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ArticleTypeController {
         this.service = service;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "ArticleType create method", description = "This method used to create article type (ADMIN)")
     @PostMapping("/create")
     private ResponseEntity<?> create(@RequestBody ArticleTypeDTO dto) {
@@ -33,8 +35,9 @@ public class ArticleTypeController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "ArticleType update method")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     private ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody ArticleTypeDTO dto,
                                      @RequestHeader(value = "Accept-Language", defaultValue = "RU") Language language) {
 
@@ -45,8 +48,9 @@ public class ArticleTypeController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "ArticleType delete method")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id,
                                         @RequestHeader(value = "Accept-Language", defaultValue = "RU") Language language) {
         log.info("ArticleType delete : id {}", id);
@@ -56,6 +60,8 @@ public class ArticleTypeController {
     }
 
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "ArticleType get list method (Page)")
     @GetMapping("/list")
     public ResponseEntity<?> getList(@RequestParam("page") Integer page,
@@ -67,7 +73,8 @@ public class ArticleTypeController {
     }
 
 
-    @Operation(summary = "ArticleType get by lang mehtod")
+    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "ArticleType get by lang method")
     @GetMapping("/byLang/{lang}")
     public ResponseEntity<?> getByLang(@PathVariable("lang") String lang) {
 
